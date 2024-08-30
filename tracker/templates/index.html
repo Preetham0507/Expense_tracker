@@ -4,9 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/media/css/main.css"
+    <link rel="stylesheet" href="/media/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+  {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+<script>
+    // Set a timer to hide the messages after 5 seconds
+    setTimeout(function() {
+        var messageList = document.querySelector('.messages');
+        if (messageList) {
+            messageList.style.display = 'none';
+        }
+    }, 3000); // 5000 milliseconds = 5 seconds
+</script>
+{% endif %}
+
     <h1>Expense Tracker</h1>
     <div class="container">
       <div class="header">
@@ -16,21 +34,27 @@
         />
         <div class="balance-container">
           <h2>Your Balance</h2>
-          <h2 id="balance" class="balance">$0.00</h2>
+          <h2 id="balance" class="balance">${{current_balance.current_balance}}</h2>
         </div>
       </div>
       <div class="inc-exp-container">
         <div>
           <h4>Income</h4>
-          <p id="money-plus" class="money plus">+$0.00</p>
+          <p id="money-plus" class="money plus">+${{income}}</p>
         </div>
         <div>
           <h4>Expenses</h4>
-          <p id="money-minus" class="money minus">-$0.00</p>
+          <p id="money-minus" class="money minus">-${{expense}}</p>
         </div>
       </div>
       <h3>History</h3>
-      <ul id="list" class="list"></ul>
+
+      <ul id="list" class="list">
+      {% for transaction in transaction%}
+      <li class="{% if transaction.expense_type == 'DEBIT' %} minus {% else %} plus {% endif %}">{{transaction.description}} <span>{{transaction.amount}}</span><a class="delete-btn" href="{% url 'delete_transaction' transaction.id %}" ><i class="fa-solid fa-trash"></i></a>
+      </li>
+      {% endfor %}
+      </ul>
       <h3>Add new transaction</h3>
       <form method="post" id="form">
         {% csrf_token %}

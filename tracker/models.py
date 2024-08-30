@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class CurrentBalance(models.Model):
-    current_balance=models.FloatField(default=0)
+    current_balance=models.FloatField(default=0.0)
 
 
 class TrackingHistory(models.Model):

@@ -1,5 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
 
+.messages {
+  margin-bottom: 20px; /* Space below the messages */
+  position: relative; /* Keep messages in the normal document flow */
+  z-index: 1000; /* Ensure messages are on top */
+}
+
+form {
+  margin-top: 60px; /* Space above the form to prevent overlap */
+}
+
+.form-control {
+  margin-bottom: 10px; /* Space out the form fields */
+}
+
+
 :root {
   --main-color: #13168d;
   --secondary-color: #393a57;
@@ -211,3 +226,6 @@ input[type="number"] {
 .notification-container p {
   margin: 0;
 }
+
+
+

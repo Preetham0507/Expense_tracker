@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block start %}
+<div style="margin-top:-80px !important">
+<h3>Login Page</h3>
+      <form method="post" id="form" autocomplete="on">
+        {% csrf_token %}
+        <div class="form-control">
+          <label for="text">Username</label>
+          <input type="text" name="username" id="text" placeholder="Username..." />
+        </div>
+        <div class="form-control">
+          <label for="amount">Password</label>
+          <input name="password" type="text" id="amount" placeholder="Password..." />
+        </div>
+        <button type="submit" class="btn">Login</button>
+        <p>Don't have an account <a href="{% url 'register' %}">Register</a></p>
+      </form>
+    </div>
+{% endblock %}

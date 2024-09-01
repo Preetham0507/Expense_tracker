@@ -1,31 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/media/css/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body>
-  {% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-<script>
-    // Set a timer to hide the messages after 5 seconds
-    setTimeout(function() {
-        var messageList = document.querySelector('.messages');
-        if (messageList) {
-            messageList.style.display = 'none';
-        }
-    }, 3000); // 5000 milliseconds = 5 seconds
-</script>
-{% endif %}
+{% extends "base.html" %}
 
+{% block start %}
     <h1>Expense Tracker</h1>
+    <a class="btn" style="background-color:brown;width:80px" href="{% url 'logout_view' %}">logout</a>
+    {{request.user}}
     <div class="container">
       <div class="header">
         <img
@@ -76,5 +54,4 @@
     <div class="notification-container" id="notification">
       <p>Please add a description and amount</p>
     </div>
-</body>
-</html>
+{% endblock %}
